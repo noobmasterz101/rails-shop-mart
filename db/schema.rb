@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2021_09_13_134155) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "admins", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -22,8 +25,8 @@ ActiveRecord::Schema.define(version: 2021_09_13_134155) do
   create_table "cart_item_mappings", force: :cascade do |t|
     t.integer "quantity"
     t.decimal "sub_cost"
-    t.integer "shopping_cart_id"
-    t.integer "item_id"
+    t.bigint "shopping_cart_id"
+    t.bigint "item_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "item_name"
@@ -43,8 +46,8 @@ ActiveRecord::Schema.define(version: 2021_09_13_134155) do
   create_table "order_item_mappings", force: :cascade do |t|
     t.integer "quantity"
     t.decimal "sub_cost"
-    t.integer "order_id"
-    t.integer "item_id"
+    t.bigint "order_id"
+    t.bigint "item_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["item_id"], name: "index_order_item_mappings_on_item_id"
@@ -56,14 +59,14 @@ ActiveRecord::Schema.define(version: 2021_09_13_134155) do
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "shopping_carts", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_shopping_carts_on_user_id"
   end
 

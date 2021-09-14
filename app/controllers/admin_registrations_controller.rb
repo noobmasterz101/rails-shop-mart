@@ -8,7 +8,7 @@ class AdminRegistrationsController < ApplicationController
       if @admin.save
       # stores saved admin id in a session
         session[:admin_id] = @admin.id
-        redirect_to root_path, notice: 'Successfully created admin account'
+        redirect_to ad_home_url, notice: 'Successfully created admin account'
       else
         render :new
       end

@@ -1,0 +1,2 @@
+class AOrderMapping < ApplicationRecord
+end

@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
     before_action :current_shopping_cart
+    after_action :clear_cart_total, only: [:place_order] 
     def index 
         @items = Item.all 
         puts "----------"
@@ -36,5 +37,10 @@ class HomeController < ApplicationController
         
     def show_user_orders
         @orders = Current.user.orders
+    end
+
+    private 
+    def clear_cart_total
+        @cart_total = 0
     end
 end

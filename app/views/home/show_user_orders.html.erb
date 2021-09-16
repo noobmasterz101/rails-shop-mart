@@ -1,5 +1,3 @@
-<h1>SHOP MART</h1>
-
 <% if Current.user %>
     <p>Logged in as: <%= Current.user.email %></p>
     <p><%= button_to 'Logout', logout_path, method: :delete %></p>

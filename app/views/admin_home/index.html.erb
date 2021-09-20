@@ -1,9 +1,3 @@
-
-<% if Current.admin %>
-        <p>Logged in as: <%= Current.admin.email %><br></p>
-        <p><%= button_to 'Logout', ad_logout_path, method: :delete %></p>
-<% end %>
-
 <p><%= link_to 'Add New Item?', new_item_path %></p>
 <p><%= link_to 'Show all items?', items_path %></p>
 <h2>Orders</h2>

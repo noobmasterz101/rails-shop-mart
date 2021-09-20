@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-    before_action :current_shopping_cart
+    before_action :set_current_user, :current_shopping_cart, :require_user_logged_in!
     after_action :clear_cart_total, only: [:place_order] 
     def index 
         @items = Item.all 

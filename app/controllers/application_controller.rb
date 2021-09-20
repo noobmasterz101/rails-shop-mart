@@ -6,8 +6,12 @@ class ApplicationController < ActionController::Base
     end
     def require_user_logged_in!
       # allows only logged in user
-      redirect_to sign_in_path, alert: 'You must be signed in' if Current.user.nil?
-    end 
+      redirect_to sign_in_path, alert: 'You must be signed in as a user' if Current.user.nil?
+    end    
+    def require_admin_logged_in!
+    # allows only logged in admin
+    redirect_to ad_sign_in_path, alert: 'You must be signed in as an admin' if Current.admin.nil?
+  end 
     def current_shopping_cart
       if login?
         @shopping_cart = Current.user.shopping_cart

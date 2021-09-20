@@ -1,3 +1,10 @@
 <h1>SHOP MART</h1>
 <h3>One stop for all your needs!</h3>
+<% if Current.admin %>
+        <p>Logged in as: <%= Current.admin.email %><br></p>
+        <p><%= button_to 'Logout', ad_logout_path, method: :delete %></p>
+<% elsif Current.user %>
+        <p>Logged in as: <%= Current.user.email %></p>
+        <p><%= button_to 'Logout', logout_path, method: :delete %></p>
+<% end %>
 <hr>

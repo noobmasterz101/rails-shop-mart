@@ -10,6 +10,8 @@ class HomeController < ApplicationController
     end
 
     def add_to_cart 
+        p params
+        # byebug
         id = params[:id].to_i
         item = Item.find(id)
         q = params[:quantity].to_i
@@ -24,10 +26,12 @@ class HomeController < ApplicationController
     end
 
     def place_order 
-        puts "@cart_total"
-        puts @cart_total
-        cost = params[:cart_total].to_d
-        order = Current.user.orders.create({:cost => cost, :status => "placed"})
+        # byebug
+        initial_cost = params[:cart_total].to_d
+        coupon = params[:coupon_code].split('_')[0].to_d
+        discount = (coupon / 100) * initial_cost 
+        p coupon
+        order = Current.user.orders.create({:cost => initial_cost - discount, :status => "placed", :discount => discount})
         @shopping_cart.cart_item_mappings.each do |mapping|
             order.order_item_mappings.create({:item_id => mapping.item_id, :quantity => mapping.quantity, :sub_cost => mapping.sub_cost})
         end

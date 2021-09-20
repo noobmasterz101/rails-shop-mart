@@ -8,6 +8,6 @@
 
 require 'faker'
 
-10.times do |i|
-    Item.create(name: Faker::Book.title, photo_url: Faker::LoremPixel.image(size: "200x200", category: 'abstract'), stocks: rand(100...150), price: rand(25...35))
+20.times do |i|
+    Item.create(name: Faker::Book.title, photo_url: Faker::LoremFlickr.colorized_image(size: "250x300", color: 'red', search_terms: ['books']), stocks: rand(100...150), price: rand(25...35))
 end

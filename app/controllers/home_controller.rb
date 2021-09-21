@@ -24,15 +24,20 @@ class HomeController < ApplicationController
     def place_order 
         # byebug
         initial_cost = params[:cart_total].to_d
-        coupon = params[:coupon_code].split('_')[0].to_d
-        discount = (coupon / 100) * initial_cost 
-        p coupon
-        order = Current.user.orders.create({:cost => initial_cost - discount, :status => "placed", :discount => discount})
-        @shopping_cart.cart_item_mappings.each do |mapping|
-            order.order_item_mappings.create({:item_id => mapping.item_id, :quantity => mapping.quantity, :sub_cost => mapping.sub_cost})
-        end
-        @shopping_cart.cart_item_mappings.destroy_all
-        redirect_to home_path, notice: "order placed succesfully"
+        code = params[:coupon_code]
+        coupon = Coupon.find_by(code: code)
+
+        if code ==  "" or coupon.present?
+            discount = code == "" ? 0 : (coupon.discount / 100) * initial_cost
+            order = Current.user.orders.create({:cost => initial_cost - discount, :status => "placed", :discount => discount})
+            @shopping_cart.cart_item_mappings.each do |mapping|
+                order.order_item_mappings.create({:item_id => mapping.item_id, :quantity => mapping.quantity, :sub_cost => mapping.sub_cost})
+            end
+            @shopping_cart.cart_item_mappings.destroy_all
+            redirect_to home_path, notice: "order placed succesfully"
+        else
+            redirect_to home_path, alert: 'Invalid Coupon Code'
+        end 
     end 
         
     def show_user_orders

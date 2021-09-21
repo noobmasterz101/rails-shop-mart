@@ -1,5 +1,5 @@
 <h1>Admin Sign In</h1>
-<%= form_with url: ad_sign_in_path do |f| %>
+<%= form_with url: ad_sign_in_path, :html => {:class => 'form-style-5'} do |f| %>
   <p>
   <%= f.label 'email:'%><br>
   <%= f.text_field :email, id: 'email' %>

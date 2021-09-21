@@ -1,12 +1,7 @@
-<% if Current.user %>
-    <p>Logged in as: <%= Current.user.email %></p>
-    <p><%= button_to 'Logout', logout_path, method: :delete %></p>
-<% end %>
-
 <%= link_to 'Back', home_path %>
 
 <h2>User Orders</h2>
-<table>
+<table id="customers">
     <thead>
         <tr>
             <th>Order ID</th>

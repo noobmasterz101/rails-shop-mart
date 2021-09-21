@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :coupons
   resources :items
   root 'welcome#index'
   get 'sign_up', to: 'registrations#new'

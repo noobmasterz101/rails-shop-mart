@@ -1,6 +1,6 @@
 <h2>Cart items  </h2>
 <% if @shopping_cart %>
-  <table>
+  <table id="customers">
     <thead>
       <tr>
         <th>ID</th>
@@ -28,15 +28,8 @@
   </h3>
   <% if @cart_total != 0 %>
       <%= form_tag place_order_path, method: "post" do %>
-          <select style="display: block;" name="coupon_code" id="coupon_code">
-            <option value="5">05 % OFF </option>
-            <% if @cart_total >= 500 %><option value="10">10 % OFF </option><% end %>
-            <% if @cart_total >= 1000 %><option value="15">15 % OFF </option><% end %>
-            <% if @cart_total >= 1500 %><option value="20">20 % OFF </option><% end %>
-            <% if @cart_total >= 2000 %><option value="25">25 % OFF </option><% end %>
-            <% if @cart_total >= 2500 %><option value="30">30 % OFF </option><% end %>
-            <% if @cart_total >= 3000 %><option value="35">35 % OFF </option><% end %>
-          </select>
+        <strong><%= label_tag 'Coupon Code' %></strong>
+        <%= text_field_tag :coupon_code %>
         <%= hidden_field_tag :cart_total , @cart_total %>
         <%= submit_tag("Place Order") %>
       <% end %>

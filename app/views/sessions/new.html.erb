@@ -8,6 +8,10 @@
   <%= f.label 'password:'%><br>
   <%= f.password_field :password, id: 'password' %>
   </p>
+  <% if params[:id] %>
+    <%= hidden_field_tag :id , params[:id] %>
+    <%= hidden_field_tag :quantity , params[:quantity] %>
+  <% end %>
   <p>
   <%= f.submit 'Log In' %>
   </p>

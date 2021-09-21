@@ -1,17 +1,23 @@
-<% if Current.user %>
-    Logged in as: <%= Current.user.email %><br>
-    <%= link_to 'Edit Password', edit_password_path %>
-    <%= button_to 'Logout', logout_path, method: :delete %>
-<% else %>
-    <p><%= link_to 'new user? register now', sign_up_path %></p>
-    <p><%= link_to 'user login', sign_in_path %></p>
-<% end %>
+<h2 style="text-align: center;">All Items</h2>
 
-    <% if Current.admin %>
-        Logged in as: <%= Current.admin.email %><br>
-        <%= link_to 'Edit Password', ad_edit_password_path %>
-        <%= button_to 'Logout', ad_logout_path, method: :delete %>
-    <% else %>
-        <p><%= link_to 'Admin Sign Up', ad_sign_up_path %></p>
-        <p><%= link_to 'Admin Login', ad_sign_in_path %></p>
+<div class = "row">
+    <% @items.each do |item| %>
+    <div class = "column">
+        <div class = "card">
+            <img src= <%= item.photo_url %>, style="width:250px;height:300px;">
+            <div class="container">
+                <h4><%= item.name %></h4>
+                <p>Stocks: <%= item.stocks %><p>
+                <p>Price: <%= item.price %><p>
+                <%= form_with url: home_path, method: :post do |f| %>
+                    <%= f.label :quantity, "Quantity" %>
+                    <%= f.number_field :quantity, min: 1, max: item.stocks %>
+                    <%= f.hidden_field :id, :value => item.id %>
+                    <%= f.submit "Add to Cart" %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <br>
     <% end %>
+</div>

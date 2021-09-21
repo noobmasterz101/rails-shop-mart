@@ -6,7 +6,14 @@ class ApplicationController < ActionController::Base
     end
     def require_user_logged_in!
       # allows only logged in user
-      redirect_to sign_in_path, alert: 'You must be signed in as a user' if Current.user.nil?
+      if params[:id]
+        p "--------------------in require_user_logged_in"
+        p params[:id]
+        p params[:quantity]
+        redirect_to sign_in_path(id: params[:id], quantity: params[:quantity]), alert: 'You must be signed in as a user' if Current.user.nil?
+      else
+        redirect_to sign_in_path, alert: 'You must be signed in as a user' if Current.user.nil?
+      end
     end    
     def require_admin_logged_in!
     # allows only logged in admin

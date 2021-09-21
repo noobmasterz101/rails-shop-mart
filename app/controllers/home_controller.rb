@@ -3,10 +3,6 @@ class HomeController < ApplicationController
     after_action :clear_cart_total, only: [:place_order] 
     def index 
         @items = Item.all 
-        puts "----------"
-        puts @shopping_cart
-        puts "----------"
-
     end
 
     def add_to_cart 

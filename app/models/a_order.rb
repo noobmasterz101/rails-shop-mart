@@ -1,2 +1,0 @@
-class AOrder < ApplicationRecord
-end
